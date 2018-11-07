@@ -1,0 +1,32 @@
+<div class="table-responsive-lg">
+  <table class="table">
+    <caption>
+      Usuarios registrados
+      <span class="badge badge-primary badge-pill">{{totalUsers}}</span>
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombres</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Editar</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let user of listUser ; let i = index">
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{user.names}}</td>
+        <td>{{user.userType}}</td>
+        <td>
+          <span *ngIf="user.state">Activo</span>
+          <span *ngIf="!user.state">Inactivo</span>
+        </td>
+        <td style="max-width: 30px">
+          <button (click)="editUser(user)"  type="button" class="btn btn-primary btn-block">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

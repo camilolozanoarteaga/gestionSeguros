@@ -1,0 +1,16 @@
+<ul class="nav nav-tabs padding-content">
+  <li class="nav-item">
+    <a [class]="createSelected" (click)="selectTab(1)">Compañias aseguradoras</a>
+  </li>
+  <li class="nav-item">
+    <a [class]="viewList" (click)="selectTab(2)">Tipos de seguros</a>
+  </li>
+</ul>
+
+<div *ngIf="createComponent">
+  <app-companies></app-companies>
+</div>
+
+<div *ngIf="viewListComponent">
+  <app-safes></app-safes>
+</div>

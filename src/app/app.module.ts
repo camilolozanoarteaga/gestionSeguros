@@ -1,16 +1,37 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+// Third-party modules
+import { AngularFireModule } from 'angularfire2';
+
+// App modules
+import { AuthModule } from './modulos/auth/auth.module';
+import { DashboardModule } from './modulos/dashboard/dashboard.module';
+
+// Environment
+import { environment } from '@atention-environment/environment';
+
+// Routes
+export const ROUTES: Routes = [{ path: '', pathMatch: 'full', redirectTo: '/auth/login' }];
+
+
+// App components
 import { AppComponent } from './app.component';
+import { Routes, RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    // Core modules
     BrowserModule,
-    AppRoutingModule
+    RouterModule.forRoot(ROUTES),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // App modules
+    AuthModule,
+    DashboardModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

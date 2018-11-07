@@ -10,6 +10,11 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    "paths": {
+      "@atention-environment/*": ["src/environments/*"],
+      "@atention-models/*": ["src/app/modulos/dashboard/models/*"],
+      "@atention-services/*": ["src/app/modulos/dashboard/shared/services/*"],
+    },
     "typeRoots": [
       "node_modules/@types"
     ],

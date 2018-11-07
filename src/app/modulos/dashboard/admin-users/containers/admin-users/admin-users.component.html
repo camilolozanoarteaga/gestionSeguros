@@ -1,0 +1,17 @@
+<ul class="nav nav-tabs padding-content">
+  <li class="nav-item">
+    <a [class]="createSelected" (click)="selectTab(1)">Resgistrar</a>
+  </li>
+  <li class="nav-item">
+    <a [class]="viewList" (click)="selectTab(2)">Ver usuarios</a>
+  </li>
+</ul>
+
+<div *ngIf="createComponent">
+  <app-create-user></app-create-user>
+</div>
+
+<div *ngIf="viewListComponent">
+  <app-list-users></app-list-users>
+</div>
+

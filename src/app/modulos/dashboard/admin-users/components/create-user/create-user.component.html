@@ -1,0 +1,59 @@
+<form [formGroup]="userForm">
+
+  <div class="form-group">
+    <label for="names">Nombre completo del usuario</label>
+    <input type="text" formControlName="names" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('names') }"
+      id="names" placeholder="Nombre completo del usuario">
+  </div>
+
+  <div class="form-group">
+    <label for="names">Identificación del usuario</label>
+    <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('id') }"
+      id="names" placeholder="Número de identificación del usuarios">
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">Correo electrónico</label>
+      <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('email') }"
+        id="email" placeholder="Correo electrónico">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="address">Dirección de residencia</label>
+      <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('names') }"
+        id="address" placeholder="Dirección">
+    </div>
+  </div>
+
+
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="phone">Teléfono fijo</label>
+      <input type="text" formControlName="phone" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('phone') }"
+        class="form-control" id="phone">
+    </div>
+    <div class="form-group col-md-5">
+      <label for="celphone">Teléfono celular</label>
+      <input type="text" formControlName="celphone" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('celphone') }"
+        class="form-control" id="celphone">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="usertype">Tipo de usuario</label>
+      <select id="usertype" formControlName="userType" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('userType') }"
+        class="form-control">
+        <option>ADMINISTRADOR</option>
+        <option>OPERADOR</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="createUser()">Guardar</button>
+</form>
+
+<div *ngIf="success" class="alert alert-primary m-3" role="alert">
+  Se creo el usuario exitosamente
+</div>
+
+<div *ngIf="existUser" class="alert alert-danger m-3" role="alert">
+  El corréo ya fue registrado, valide la información
+</div>
