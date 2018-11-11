@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AdminSysService } from '@atention-services/admin-sys/admin-sys.service';
 
 
 @Component({
@@ -10,18 +11,28 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 export class SafesComponent implements OnInit {
 
   safeForm: FormGroup;
+  allSafes: any;
 
   constructor(
     private _fb: FormBuilder,
+    private _adminSysService: AdminSysService
   ) { }
 
   ngOnInit() {
 
     this.safeForm = this._fb.group({
-      nameCompanie: ['', [
+      safe: ['', [
         Validators.required,
       ]],
     });
+
+    this._adminSysService.getAllSafes().subscribe(
+      (safes) => {
+
+        this.allSafes = safes[0]['safes'];
+
+      }
+    );
 
   }
 
@@ -34,7 +45,22 @@ export class SafesComponent implements OnInit {
 
   createSafe() {
 
-    console.log(this.safeForm.value);
+    this.allSafes.push(this.safeForm.value['safe']);
+    this._adminSysService.updateSafes(this.allSafes);
+
+  }
+
+  removeSafe(safe: string) {
+
+    const index = this.allSafes.indexOf(safe);
+
+    if (index > -1) {
+
+      this.allSafes.splice(index, 1);
+
+    }
+
+    this._adminSysService.updateSafes(this.allSafes);
 
   }
 

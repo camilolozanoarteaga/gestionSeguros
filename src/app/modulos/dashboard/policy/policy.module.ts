@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Third-party modules
-import {NgbModule, NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModule, NgbAccordionModule, NgbDatepickerModule} from '@ng-bootstrap/ng-bootstrap';
 
 
 // Shared modules
@@ -26,7 +26,8 @@ export const ROUTES: Routes = [
     FormsModule,
     SharedModule.forRoot(),
     NgbModule,
-    NgbAccordionModule
+    NgbAccordionModule,
+    NgbDatepickerModule
   ],
   declarations: [CreatePolicyComponent]
 })

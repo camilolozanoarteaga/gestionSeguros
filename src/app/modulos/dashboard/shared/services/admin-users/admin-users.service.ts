@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class AdminUsersService {
 
   private _collection = 'system-users';
-
   private _systemUsers: AngularFirestoreCollection<any> = this._afs.collection(this._collection);
 
   userCollection: AngularFirestoreCollection<SystemUsersmInterface>;
@@ -23,7 +22,7 @@ export class AdminUsersService {
   async createSystemUser(user: SystemUsersmInterface) {
 
     const userCredential = await this._afAuth.auth.createUserWithEmailAndPassword(user['email'], user['password']);
-    
+
     const userUid = userCredential.user.uid;
     user.uid = userUid;
 

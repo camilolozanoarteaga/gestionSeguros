@@ -10,4 +10,3 @@ export interface SystemUsersmInterface {
     uid?: string;
     state: boolean;
   }
-  

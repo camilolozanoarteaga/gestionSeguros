@@ -5,8 +5,6 @@
         <ngb-panel title="Información personal">
           <ng-template ngbPanelContent>
 
-
-
             <div class="form-group">
               <label for="names">Nombre completo</label>
               <input type="text" formControlName="names" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('names') }"
@@ -77,9 +75,95 @@
         <ngb-panel title="Información de la póliza">
           <ng-template ngbPanelContent>
 
+
+            <!-- poliza -->
+            <div class="row">
+              <div class="form-group col-sm-3">
+                <label for="numeroPoliza">Número de poliza</label>
+                <input type="text" formControlName="numeroPoliza" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('numeroPoliza') }"
+                  id="numeroPoliza">
+              </div>
+              <div class="form-group col-sm-9">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <label>Vigencia</label>
+
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [displayMonths]="displayMonths"
+                          [navigation]="navigation" [outsideDays]="outsideDays" [showWeekNumbers]="showWeekNumbers"
+                          ngbDatepicker #d="ngbDatepicker">
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="email">Tipo seguro</label>
+                <input type="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('email') }"
+                  id="email" placeholder="Correo electrónico">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="address">Compañia aseguradora</label>
+                <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('names') }"
+                  id="address" placeholder="Dirección">
+              </div>
+            </div>
+
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="phone1">Producto asegurado</label>
+                <input type="text" formControlName="phone1" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('phone1') }"
+                  class="form-control" id="phone1">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="phone2">Valor poliza</label>
+                <input type="text" formControlName="phone2" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('phone2') }"
+                  class="form-control" id="phone2">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="phone3">Forma de pago</label>
+                <input type="text" formControlName="phone3" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('phone3') }"
+                  class="form-control" id="phone3">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="celphone1">Cliente</label>
+                <input type="text" formControlName="celphone1" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('celphone1') }"
+                  class="form-control" id="celphone1">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="celphone2">Asegurado</label>
+                <input type="text" formControlName="celphone2" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('celphone2') }"
+                  class="form-control" id="celphone2">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="celphone3">Nueva o renovación</label>
+                <input type="text" formControlName="celphone3" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('celphone3') }"
+                  class="form-control" id="celphone3">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="celphone3">Asesor</label>
+                <input type="text" formControlName="celphone3" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('celphone3') }"
+                  class="form-control" id="celphone3">
+              </div>
+            </div>
+
+            <!-- fin poliza -->
+
             <div class="d-flex justify-content-between">
               <button type="submit" class="btn btn-success" [disabled]="!policyForm.valid" (click)="createPolicy()">Guardar</button>
-              <button type="submit" class="btn btn-danger"(click)="cleanForm()">Limpiar</button>
+              <button type="submit" class="btn btn-danger" (click)="cleanForm()">Limpiar</button>
             </div>
 
           </ng-template>

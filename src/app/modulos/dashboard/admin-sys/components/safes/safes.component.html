@@ -1,50 +1,49 @@
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0" >
-    <ngb-panel title="Seguros registradas">
-      <ng-template ngbPanelContent>
-        <div class="table-responsive-sm">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre del seguro</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>seguro1</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>seguro2</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>seguro3</td>
-              </tr>
-            </tbody>
-          </table>
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <ngb-panel title="Seguros registradas">
+    <ng-template ngbPanelContent>
+      <div class="table-responsive-sm">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre del seguro</th>
+              <th scope="col">Eliminar</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let safe of allSafes; let i = index">
+              <th scope="companie.">{{i+1}}</th>
+              <td>{{safe}}</td>
+              <td>
+                <button type="button" class="btn btn-danger btn-sm btn-block" (click)="removeSafe(safe)">
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Crear nuevo seguro">
+    <ng-template ngbPanelContent>
+
+      <form [formGroup]="safeForm">
+
+        <div class="form-group">
+          <label for="safe">Nombre Seguro</label>
+          <input type="text" formControlName="safe" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('safe') }"
+            id="safe" placeholder="Nombre completo">
         </div>
-      </ng-template>
-    </ngb-panel>
-    <ngb-panel title="Crear nuevo seguro">
-      <ng-template ngbPanelContent>
-  
-        <form [formGroup]="safeForm">
-  
-          <div class="form-group">
-            <label for="nameCompanie">Nombre Seguro</label>
-            <input type="text" formControlName="nameCompanie" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('nameCompanie') }"
-              id="nameCompanie" placeholder="Nombre completo">
-          </div>
-  
-          <div class="d-flex justify-content-between">
-              <button type="submit" class="btn btn-success" [disabled]="!safeForm.valid" (click)="createSafe()">Guardar</button>
-              <button type="submit" class="btn btn-danger"(click)="cleanForm()">Limpiar</button>
-            </div>
-  
-        </form>
-  
-      </ng-template>
-    </ngb-panel>
-  </ngb-accordion>
+
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-success" [disabled]="!safeForm.valid" (click)="createSafe()">Guardar</button>
+          <button type="submit" class="btn btn-danger" (click)="cleanForm()">Limpiar</button>
+        </div>
+
+      </form>
+
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>

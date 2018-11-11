@@ -49,7 +49,12 @@ export class CreatePolicyComponent implements OnInit {
         Validators.required
       ]],
       systemType: [2], // client
-      state: [true]
+      state: [true],
+      // Data poliza
+      numeroPoliza: ['', [Validators.required]],
+      vigencia: ['', [Validators.required]],
+      // numeroPoliza: ['', [Validators.required]],
+      // numeroPoliza: ['', [Validators.required]]
     });
 
   }
