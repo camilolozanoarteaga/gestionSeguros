@@ -13,4 +13,3 @@ export interface ClientInterface {
     uid?: string;
     state: boolean;
   }
-  

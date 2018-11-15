@@ -22,7 +22,8 @@ export const ROUTES: Routes = [{
     { path: 'menu', loadChildren: './menu/menu.module#MenuModule' },
     { path: 'admin-users', loadChildren: './admin-users/admin-users.module#AdminUsersModule' },
     { path: 'policy', loadChildren: './policy/policy.module#PolicyModule' },
-    { path: 'admin-sys', loadChildren: './admin-sys/admin-sys.module#AdminSysModule' }
+    { path: 'admin-sys', loadChildren: './admin-sys/admin-sys.module#AdminSysModule' },
+    { path: 'clients', loadChildren: './clients/clients.module#ClientsModule' },
   ]
 }];
 

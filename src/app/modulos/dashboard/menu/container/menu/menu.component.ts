@@ -33,6 +33,11 @@ export class MenuComponent implements OnInit {
       iconName: 'fa-user',
       route: '/dashboard/admin-users',
     }, {
+      displayName: 'Crear cliente',
+      description: 'Ingrese y cree una nuevo cliente',
+      iconName: 'fa-book',
+      route: '/dashboard/clients',
+    }, {
       displayName: 'Crear póliza',
       description: 'Ingrese y cree una nueva poliza',
       iconName: 'fa-book',

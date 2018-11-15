@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { AdminUsersService } from '@atention-services/admin-users/admin-users.service'
+import { AdminUsersService } from '@atention-services/admin-users/admin-users.service';
 
 @Component({
   selector: 'app-create-user',

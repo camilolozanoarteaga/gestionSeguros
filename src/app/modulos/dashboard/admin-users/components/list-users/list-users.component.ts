@@ -2,7 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AdminUsersService } from '@atention-services/admin-users/admin-users.service';
 import { Subscription } from 'rxjs';
 import { SystemUsersmInterface } from '@atention-models/system-users.interface';
-
+import { SharedUserDataService } from '../../shared/shared-user-data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-users',
@@ -11,33 +12,38 @@ import { SystemUsersmInterface } from '@atention-models/system-users.interface';
 })
 export class ListUsersComponent implements OnInit, OnDestroy {
 
-
-  listUsersSubscription : Subscription;
+  listUsersSubscription: Subscription;
   listUser: any;
   totalUsers: Number;
 
   constructor(
-    private _adminUsersService : AdminUsersService,
+    private _adminUsersService: AdminUsersService,
+    private _sharedUserDataService: SharedUserDataService,
+    private _router: Router,
   ) { }
 
   ngOnInit() {
 
     this.listUsersSubscription = this._adminUsersService.getAllUsers()
-    .subscribe((list) => {
+      .subscribe((list) => {
 
-      this.listUser = list;
-      this.totalUsers = list.length;
-    }, err => console.log(err));
+        this.listUser = list;
+        this.totalUsers = list.length;
+
+      }, err => console.log(err));
 
   }
 
-  editUser(user: SystemUsersmInterface ) {
-    console.log(user);
+  editUser(user: SystemUsersmInterface) {
+
+    this._sharedUserDataService.editUser(user);
+    this._router.navigate(['/dashboard/admin-users/update']);
+
   }
 
   ngOnDestroy() {
 
-    this.listUsersSubscription.unsubscribe;
+    this.listUsersSubscription.unsubscribe();
 
   }
 

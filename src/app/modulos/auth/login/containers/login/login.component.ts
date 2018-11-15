@@ -34,30 +34,30 @@ export class LoginComponent implements OnInit {
 
   }
 
-    // COMPONENT METHODS ---------------------------------------------------------
-    
-    signInWithEmail(): void {
-      const email = this.loginForm.get('email').value;
-      const password = this.loginForm.get('password').value;
+  // COMPONENT METHODS ---------------------------------------------------------
 
-      this._authService.signIn(email, password)
+  signInWithEmail(): void {
+    const email = this.loginForm.get('email').value;
+    const password = this.loginForm.get('password').value;
+
+    this._authService.signIn(email, password)
       .then((login: any) => {
 
-        if(login.operationType === "signIn") {
+        if (login.operationType === 'signIn') {
           this._router.navigate(['/dashboard']);
-        } 
+        }
 
       }).catch((err) => {
 
-        if(err.code === "auth/wrong-password") {
-          console.log("mal contra");
+        if (err.code === 'auth/wrong-password') {
+          console.log('mal contra');
         }
 
-        if(err.code === "auth/user-not-found") {
-          console.log("no existe");
+        if (err.code === 'auth/user-not-found') {
+          console.log('no existe');
         }
       });
 
-    }
+  }
 
 }

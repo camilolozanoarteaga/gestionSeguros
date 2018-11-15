@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
 // Third-party modules
 
 // Shared modules
@@ -17,7 +16,7 @@ import { UpdateUsersComponent } from './components/update-users/update-users.com
 
 export const ROUTES: Routes = [
   { path: '', component: AdminUsersComponent },
-  { path: 'update/', component: UpdateUsersComponent }
+  { path: 'update', component: UpdateUsersComponent }
 ];
 
 @NgModule({

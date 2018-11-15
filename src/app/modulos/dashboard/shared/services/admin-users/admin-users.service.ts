@@ -37,5 +37,11 @@ export class AdminUsersService {
 
   }
 
+  updateSystemUser(userData: SystemUsersmInterface) {
+
+    const user = this._afs.doc(`${this._collection}/${userData['uid']}`);
+    return user.update(userData);
+
+  }
 
 }

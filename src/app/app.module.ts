@@ -12,7 +12,10 @@ import { DashboardModule } from './modulos/dashboard/dashboard.module';
 import { environment } from '@atention-environment/environment';
 
 // Routes
-export const ROUTES: Routes = [{ path: '', pathMatch: 'full', redirectTo: '/auth/login' }];
+export const ROUTES: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/auth/login' },
+  { path: '**', redirectTo: '/auth/login  '}
+];
 
 
 // App components

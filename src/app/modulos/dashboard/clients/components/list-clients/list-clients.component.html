@@ -2,7 +2,7 @@
   <table class="table">
     <caption>
       Usuarios registrados
-      <span class="badge badge-primary badge-pill">{{totalUsers}}</span>
+      <span class="badge badge-primary badge-pill">{{totalClients}}</span>
     </caption>
     <thead>
       <tr>
@@ -13,7 +13,7 @@
         <th scope="col">Editar</th>
       </tr>
     </thead>
-    <tbody *ngFor="let user of listUser ; let i = index">
+    <tbody *ngFor="let user of listClients ; let i = index">
       <tr>
         <th scope="row">{{i+1}}</th>
         <td>{{user.names}}</td>
@@ -23,10 +23,9 @@
           <span *ngIf="user.state === 'INACTIVO'">Inactivo</span>
         </td>
         <td style="max-width: 30px">
-          <button (click)="editUser(user)"  type="button" class="btn btn-primary btn-block"><i class="fa fas fa-edit"></i></button>
+          <button (click)="editUser(user)" type="button" class="btn btn-primary btn-block"><i class="fa fas fa-edit"></i></button>
         </td>
       </tr>
     </tbody>
   </table>
-
 </div>

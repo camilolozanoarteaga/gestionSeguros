@@ -1,6 +1,6 @@
 export interface SystemUsersmInterface {
     email: string;
-    password: string;
+    password?: string;
     names: string;
     address: string;
     phone: string;
