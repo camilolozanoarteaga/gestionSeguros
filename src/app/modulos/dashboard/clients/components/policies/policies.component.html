@@ -1,4 +1,4 @@
-<div *ngIf="client !== undefined">
+<div *ngIf="client !== undefined && policies !== undefined">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Información del cliente</h5>
@@ -18,7 +18,7 @@
 
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">Polizas registradas</h5>
+      <h5 class="card-title">Polizas registradas <span class="badge badge-success">{{policies.length}}</span></h5>
 
       <ngb-accordion #acc="ngbAccordion" class="m-3" activeIds="ngb-panel-0">
         <ngb-panel *ngFor="let policie of policies">
