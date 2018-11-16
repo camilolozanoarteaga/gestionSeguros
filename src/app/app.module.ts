@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 // Third-party modules
 import { AngularFireModule } from 'angularfire2';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // App modules
 import { AuthModule } from './modulos/auth/auth.module';
@@ -34,7 +35,7 @@ import { Routes, RouterModule } from '@angular/router';
     // App modules
     AuthModule,
     DashboardModule,
-
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

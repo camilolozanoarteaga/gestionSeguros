@@ -13,6 +13,9 @@ export class UpdateUsersComponent implements OnInit {
 
   userForm: FormGroup;
   user: SystemUsersmInterface;
+  load: boolean;
+  success: boolean;
+  error: boolean;
 
   constructor(
     private _fb: FormBuilder,
@@ -22,6 +25,9 @@ export class UpdateUsersComponent implements OnInit {
 
   ngOnInit() {
 
+    this.load = false;
+    this.success = false;
+    this.error = false;
     this._sharedUserDataService.userCast$.subscribe(
       user => {
 
@@ -57,10 +63,7 @@ export class UpdateUsersComponent implements OnInit {
         });
 
       }, err => console.log(err)
-      , () => {
-
-
-      });
+      , () => {});
 
 
 
@@ -76,8 +79,28 @@ export class UpdateUsersComponent implements OnInit {
   }
 
   updateUser() {
-    console.log(this.userForm.value);
-    this._adminUsersService.updateSystemUser(this.userForm.value);
+
+    this.load = true;
+    this.error = false;
+
+    this._adminUsersService.updateSystemUser(this.userForm.value)
+      .then(() => {
+
+        this.load = false;
+        this.success = true;
+
+        setTimeout(() => {
+
+          this.success = false;
+
+        }, 5000);
+
+      })
+      .catch(() => {
+
+        this.error = true;
+
+      });
 
   }
 

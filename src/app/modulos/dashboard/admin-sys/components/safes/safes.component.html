@@ -1,14 +1,22 @@
-<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <ngb-panel title="Seguros registradas">
+<ngb-accordion #acc="ngbAccordion" activeIds="static-1">
+  <ngb-panel title="Seguros registradas" id="static-1">
     <ng-template ngbPanelContent>
-      <div class="table-responsive-sm">
+
+      <div *ngIf="loadInit || loadUpdate" class="fa-3x d-flex justify-content-center m-4">
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
+
+      <div *ngIf="error" class="alert alert-danger m-4" role="alert">
+        <strong>Error al ejecutar la acción!</strong> Intentelo nuevamente.
+      </div>
+
+      <div *ngIf="!loadInit" class="table-responsive-sm">
         <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Nombre del seguro</th>
               <th scope="col">Eliminar</th>
-
             </tr>
           </thead>
           <tbody>
@@ -23,6 +31,8 @@
             </tr>
           </tbody>
         </table>
+        <span class="m-4" *ngIf="allSafes.length === 0">No se encontro información.</span>
+
       </div>
     </ng-template>
   </ngb-panel>
@@ -37,7 +47,7 @@
             id="safe" placeholder="Nombre completo">
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div *ngIf="!loadUpdate" class="d-flex justify-content-between">
           <button type="submit" class="btn btn-success" [disabled]="!safeForm.valid" (click)="createSafe()">Guardar</button>
           <button type="submit" class="btn btn-danger" (click)="cleanForm()">Limpiar</button>
         </div>

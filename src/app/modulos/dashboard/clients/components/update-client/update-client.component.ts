@@ -14,6 +14,10 @@ export class UpdateClientComponent implements OnInit {
 
   policyForm: FormGroup;
   age: number;
+  load: boolean;
+  success: boolean;
+  error: boolean;
+
 
   constructor(
     private _fb: FormBuilder,
@@ -24,6 +28,9 @@ export class UpdateClientComponent implements OnInit {
   ngOnInit() {
 
     this.age = null;
+    this.load = false;
+    this.success = false;
+    this.error = false;
 
     this._sharedClientService.clientCast$.subscribe(
       client => {
@@ -85,11 +92,27 @@ export class UpdateClientComponent implements OnInit {
 
   updateClient() {
 
+    this.load = true;
+    this.error = false;
+
     this._clientsService.updateSystemUser(this.policyForm.value)
       .then((res) => {
-        console.log(res);
+
+        this.load = false;
+        this.success = true;
+
+        setTimeout(() => {
+
+          this.success = false;
+
+        }, 5000);
+
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => {
+
+        this.error = true;
+
+      });
 
   }
 

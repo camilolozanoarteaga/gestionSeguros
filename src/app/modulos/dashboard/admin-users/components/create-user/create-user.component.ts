@@ -12,6 +12,7 @@ export class CreateUserComponent implements OnInit {
   userForm: FormGroup;
   existUser: boolean;
   success: boolean;
+  loadInit: boolean;
 
   constructor(
     private _fb: FormBuilder,
@@ -23,6 +24,7 @@ export class CreateUserComponent implements OnInit {
 
     this.existUser = false;
     this.success = false;
+    this.loadInit = false;
 
     this.userForm = this._fb.group({
       email: ['', [
@@ -69,11 +71,13 @@ export class CreateUserComponent implements OnInit {
 
     this.success = false;
     this.existUser = false;
+    this.loadInit = true;
 
     this._adminUsersService.createSystemUser(this.userForm.value)
       .then((success) => {
-
         this.success = true;
+        this.loadInit = false;
+
         setTimeout(() => {
           this.success = false;
         }, 4000)
@@ -81,6 +85,7 @@ export class CreateUserComponent implements OnInit {
       })
       .catch(() => {
 
+        this.loadInit = false;
         this.existUser = true;
         setTimeout(() => {
           this.existUser = false;

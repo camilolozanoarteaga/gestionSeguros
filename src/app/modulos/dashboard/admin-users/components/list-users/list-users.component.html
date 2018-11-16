@@ -1,5 +1,10 @@
 <div class="table-responsive-lg">
-  <table class="table">
+
+  <div *ngIf="loadInit" class="fa-3x d-flex justify-content-center m-4">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
+
+  <table *ngIf="!loadInit" class="table">
     <caption>
       Usuarios registrados
       <span class="badge badge-primary badge-pill">{{totalUsers}}</span>
@@ -8,7 +13,7 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nombres</th>
-        <th scope="col">Usuario</th>
+        <th scope="col">Tipo usuario</th>
         <th scope="col">Estado</th>
         <th scope="col">Editar</th>
       </tr>
@@ -23,10 +28,11 @@
           <span *ngIf="user.state === 'INACTIVO'">Inactivo</span>
         </td>
         <td style="max-width: 30px">
-          <button (click)="editUser(user)"  type="button" class="btn btn-primary btn-block"><i class="fa fas fa-edit"></i></button>
+          <button (click)="editUser(user)" type="button" class="btn btn-primary btn-block"><i class="fa fas fa-edit"></i></button>
         </td>
       </tr>
     </tbody>
   </table>
+  <span class="m-4" *ngIf="listUser.length === 0">No se encontro información.</span>
 
 </div>

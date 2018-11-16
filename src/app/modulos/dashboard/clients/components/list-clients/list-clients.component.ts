@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class ListClientsComponent implements OnInit, OnDestroy {
 
+  loadInit: boolean;
   listClientsSubscription: Subscription;
   listClients: any;
   totalClients: Number;
@@ -24,11 +25,14 @@ export class ListClientsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.loadInit = true;
+
     this.listClientsSubscription = this._ClientsService.getAllClients()
     .subscribe((list) => {
 
       this.listClients = list;
       this.totalClients = list.length;
+      this.loadInit = false;
 
     }, err => console.log(err));
 
@@ -42,9 +46,16 @@ export class ListClientsComponent implements OnInit, OnDestroy {
 
   }
 
+  getPolicy(user: ClientInterface) {
+
+    this._sharedClientService.editUser(user);
+    this._router.navigate(['/dashboard/clients/policies']);
+
+  }
+
   ngOnDestroy() {
 
-    // this.listUsersSubscription.unsubscribe();
+    this.listClientsSubscription.unsubscribe();
 
   }
 

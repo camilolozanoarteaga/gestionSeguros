@@ -1,4 +1,9 @@
 <div class="table-responsive-lg">
+
+  <div *ngIf="loadInit" class="fa-3x d-flex justify-content-center m-4">
+    <i class="fa fa-spinner fa-spin"></i>
+  </div>
+
   <table class="table">
     <caption>
       Usuarios registrados
@@ -8,8 +13,8 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Nombres</th>
-        <th scope="col">Usuario</th>
-        <th scope="col">Estado</th>
+        <th scope="col">Documento de identidad</th>
+        <th scope="col">Polizas</th>
         <th scope="col">Editar</th>
       </tr>
     </thead>
@@ -17,10 +22,9 @@
       <tr>
         <th scope="row">{{i+1}}</th>
         <td>{{user.names}}</td>
-        <td>{{user.userType}}</td>
-        <td>
-          <span *ngIf="user.state === 'ACTIVO'">Activo</span>
-          <span *ngIf="user.state === 'INACTIVO'">Inactivo</span>
+        <td>{{user.id}}</td>
+        <td style="max-width: 30px">
+          <button (click)="getPolicy(user)" type="button" class="btn btn-primary btn-block"><i class="fa fa-file"></i></button>
         </td>
         <td style="max-width: 30px">
           <button (click)="editUser(user)" type="button" class="btn btn-primary btn-block"><i class="fa fas fa-edit"></i></button>
@@ -28,4 +32,6 @@
       </tr>
     </tbody>
   </table>
+  <span class="m-4" *ngIf="totalClients === 0">No se encontro información.</span>
+
 </div>

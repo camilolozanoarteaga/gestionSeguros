@@ -58,16 +58,21 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="updateUser  ()">Guardar</button>
+    <button *ngIf="!load" type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="updateUser  ()">Guardar</button>
   </form>
 
-  <div *ngIf="success" class="alert alert-primary m-3" role="alert">
-    Se creo el usuario exitosamente
+
+  <div *ngIf="load" class="fa-3x d-flex justify-content-center m-4">
+    <i class="fa fa-spinner fa-spin"></i>
   </div>
 
-  <div *ngIf="existUser" class="alert alert-danger m-3" role="alert">
-    El corréo ya fue registrado, valide la información
+  <div *ngIf="success" class="alert alert-success m-3" role="alert">
+    Usuario actualizado correctamente
   </div>
+
+  <div *ngIf="error" class="alert alert-danger" role="alert">
+    <strong>Error al ejecutar la acción!</strong> Intentelo nuevamente.
+  </div>
+
 
 </div>
-

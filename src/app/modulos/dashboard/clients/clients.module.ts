@@ -14,13 +14,15 @@ import { ClientsComponent } from './container/clients/clients.component';
 import { InformationClientComponent } from './components/information-client/information-client.component';
 import { ListClientsComponent } from './components/list-clients/list-clients.component';
 import { UpdateClientComponent } from './components/update-client/update-client.component';
+import { PoliciesComponent } from './components/policies/policies.component';
 
 
 
 // Routes
 export const ROUTES: Routes = [
   { path: '', component: ClientsComponent },
-  { path: 'update', component: UpdateClientComponent }
+  { path: 'update', component: UpdateClientComponent },
+  { path: 'policies', component: PoliciesComponent }
 ];
 
 @NgModule({
@@ -32,6 +34,6 @@ export const ROUTES: Routes = [
     SharedModule.forRoot(),
     NgbModule, NgbAccordionModule, NgbDatepickerModule
   ],
-  declarations: [ClientsComponent, InformationClientComponent, ListClientsComponent, UpdateClientComponent]
+  declarations: [ClientsComponent, InformationClientComponent, ListClientsComponent, UpdateClientComponent, PoliciesComponent]
 })
 export class ClientsModule { }

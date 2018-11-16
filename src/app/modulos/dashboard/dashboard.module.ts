@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // third-party modules
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 // Shared modules
 // import { SharedModule } from './shared/shared.module';
@@ -31,6 +33,7 @@ export const ROUTES: Routes = [{
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES),
+    NgxSpinnerModule
   ],
   declarations: [
     DashboardComponent

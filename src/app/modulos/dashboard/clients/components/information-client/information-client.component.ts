@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ClientsService } from '@atention-services/clients/clients.service';
+import { PolicyService } from '@atention-services/policy/policy.service';
 
 import * as moment from 'moment';
 
@@ -13,15 +14,24 @@ export class InformationClientComponent implements OnInit {
 
   policyForm: FormGroup;
   age: number;
+  load: boolean;
+  error: boolean;
+  success: boolean;
+  existUser: boolean;
 
   constructor(
     private _fb: FormBuilder,
-    private _clientsService: ClientsService
+    private _clientsService: ClientsService,
+    private _policyService: PolicyService,
   ) { }
 
   ngOnInit() {
 
+    this.existUser = false;
     this.age = null;
+    this.error = false;
+    this.load = false;
+    this.success = false;
 
     this.policyForm = this._fb.group({
       email: ['', [
@@ -67,8 +77,11 @@ export class InformationClientComponent implements OnInit {
 
   searchClient(id: string) {
 
-    console.log(id);
-    // this._clientsService;
+    this._policyService.getClient(id).subscribe((success) => {
+
+      this.existUser = (success !== undefined);
+
+    });
 
   }
 
@@ -83,17 +96,26 @@ export class InformationClientComponent implements OnInit {
 
   createClient() {
 
+    this.load = true;
+    this.error = false;
+
     this._clientsService.createClient(this.policyForm.value)
       .then((res) => {
 
         this.policyForm.reset();
-        console.log(res);
+        this.load = false;
 
+        this.success = true;
+
+        setTimeout(() => {
+          this.success = false;
+        }, 5000);
 
       })
       .catch((err) => {
 
-        console.log(err);
+        this.error = true;
+
 
       });
 

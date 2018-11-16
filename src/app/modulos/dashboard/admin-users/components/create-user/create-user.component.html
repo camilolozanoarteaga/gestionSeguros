@@ -47,8 +47,12 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="createUser()">Guardar</button>
+  <button *ngIf="!loadInit" type="submit" class="btn btn-primary" [disabled]="!userForm.valid" (click)="createUser()">Guardar</button>
 </form>
+
+<div *ngIf="loadInit" class="fa-3x d-flex justify-content-center m-4">
+  <i class="fa fa-spinner fa-spin"></i>
+</div>
 
 <div *ngIf="success" class="alert alert-primary m-3" role="alert">
   Se creo el usuario exitosamente

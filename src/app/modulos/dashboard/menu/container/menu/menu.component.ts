@@ -33,8 +33,8 @@ export class MenuComponent implements OnInit {
       iconName: 'fa-user',
       route: '/dashboard/admin-users',
     }, {
-      displayName: 'Crear cliente',
-      description: 'Ingrese y cree una nuevo cliente',
+      displayName: 'Administrar clientes',
+      description: 'Ingrese y administre la información de los clientess',
       iconName: 'fa-book',
       route: '/dashboard/clients',
     }, {

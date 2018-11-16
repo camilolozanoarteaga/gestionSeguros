@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AdminSysService } from '@atention-services/admin-sys/admin-sys.service';
 
+import { NgxSpinnerService } from 'ngx-spinner';
+
 @Component({
   selector: 'app-companies',
   templateUrl: './companies.component.html',
@@ -11,14 +13,19 @@ export class CompaniesComponent implements OnInit {
 
   CompanieForm: FormGroup;
   allCompanies: any;
+  loadInit: boolean;
+  loadUpdate: boolean;
+  error: boolean;
 
   constructor(
     private _fb: FormBuilder,
-    private _adminSysService: AdminSysService
+    private _adminSysService: AdminSysService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit() {
 
+    this.loadInit = true;
     this.CompanieForm = this._fb.group({
       companies: ['', [
         Validators.required,
@@ -29,6 +36,7 @@ export class CompaniesComponent implements OnInit {
       .subscribe((companies) => {
 
         this.allCompanies = companies[0]['companies'];
+        this.loadInit = false;
 
       }, err => console.log(err));
 
@@ -43,13 +51,27 @@ export class CompaniesComponent implements OnInit {
 
   createCompanie() {
 
+    this.loadUpdate = true;
+    this.error = false;
     this.allCompanies.push(this.CompanieForm.value['companies']);
-    this._adminSysService.updateCompanies(this.allCompanies);
+    this._adminSysService.updateCompanies(this.allCompanies)
+      .then(() => {
+
+        this.loadUpdate = false;
+
+      })
+      .catch(() => {
+
+        this.error = true;
+
+      });
 
   }
 
   removeCompanie(name: string) {
 
+    this.loadUpdate = true;
+    this.error = false;
     const index = this.allCompanies.indexOf(name);
 
     if (index > -1) {
@@ -58,7 +80,17 @@ export class CompaniesComponent implements OnInit {
 
     }
 
-    this._adminSysService.updateCompanies(this.allCompanies);
+    this._adminSysService.updateCompanies(this.allCompanies)
+      .then(() => {
+
+        this.loadUpdate = false;
+
+      })
+      .catch(() => {
+
+        this.error = true;
+
+      });
 
   }
 

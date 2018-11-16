@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Third-party modules
 import {NgbModule, NgbAccordionModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 // Shared modules
 import { SharedModule } from '../shared/shared.module';
@@ -25,7 +26,7 @@ export const ROUTES: Routes = [
     ReactiveFormsModule,
     FormsModule,
     SharedModule.forRoot(),
-    NgbModule, NgbAccordionModule
+    NgbModule, NgbAccordionModule, NgxSpinnerModule
   ],
   declarations: [AdminSysComponent, CompaniesComponent, SafesComponent]
 })

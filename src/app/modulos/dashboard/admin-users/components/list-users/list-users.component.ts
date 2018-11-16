@@ -15,6 +15,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
   listUsersSubscription: Subscription;
   listUser: any;
   totalUsers: Number;
+  loadInit: boolean;
 
   constructor(
     private _adminUsersService: AdminUsersService,
@@ -24,11 +25,14 @@ export class ListUsersComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+    this.loadInit = true;
+
     this.listUsersSubscription = this._adminUsersService.getAllUsers()
       .subscribe((list) => {
 
         this.listUser = list;
         this.totalUsers = list.length;
+        this.loadInit = false;
 
       }, err => console.log(err));
 

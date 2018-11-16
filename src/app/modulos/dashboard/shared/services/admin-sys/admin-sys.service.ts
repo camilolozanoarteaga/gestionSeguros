@@ -34,7 +34,7 @@ export class AdminSysService {
 
   updateCompanies(companies: [string]) {
 
-    this._updateCompanies.update({ companies });
+    return this._updateCompanies.update({ companies });
 
   }
 
@@ -47,7 +47,7 @@ export class AdminSysService {
 
   updateSafes(safes: [string]) {
 
-    this._updateSafes.update({ safes });
+    return this._updateSafes.update({ safes });
 
   }
 
