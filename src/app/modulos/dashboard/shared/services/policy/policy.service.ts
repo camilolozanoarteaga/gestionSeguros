@@ -6,11 +6,13 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class PolicyService {
 
+
   private _collection = 'clients';
   private _collectionPolizy = 'policies';
 
   clientDocument: AngularFirestoreDocument<ClientInterface>;
   clientObservable$: Observable<ClientInterface>;
+
 
   private _policies: AngularFirestoreCollection<any> = this._afs.collection(this._collectionPolizy);
 
@@ -31,6 +33,13 @@ export class PolicyService {
   createPolice(policy: any) {
 
     return this._policies.doc(policy['numberPolicy']).set(policy);
+
+  }
+
+  getPolicies(id: string) {
+    const policies = this._afs.collection(this._collectionPolizy, ref => ref.where('idClient', '==', id) );
+
+    return policies.valueChanges();
 
   }
 
