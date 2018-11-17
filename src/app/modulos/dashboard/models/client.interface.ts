@@ -12,4 +12,5 @@ export interface ClientInterface {
     systemType: number; // client
     uid?: string;
     state: boolean;
+    gender: string;
   }
