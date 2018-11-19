@@ -10,7 +10,6 @@ import { AuthModule } from './modulos/auth/auth.module';
 import { DashboardModule } from './modulos/dashboard/dashboard.module';
 
 // Environment
-import { environment } from '@atention-environment/environment';
 
 // Routes
 export const ROUTES: Routes = [
@@ -18,10 +17,11 @@ export const ROUTES: Routes = [
   { path: '**', redirectTo: '/auth/login  '}
 ];
 
-
 // App components
 import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,8 @@ import { Routes, RouterModule } from '@angular/router';
     // App modules
     AuthModule,
     DashboardModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

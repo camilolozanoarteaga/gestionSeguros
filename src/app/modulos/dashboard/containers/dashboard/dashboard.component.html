@@ -1,7 +1,19 @@
 <div class="container">
-  <nav class="padding-content navbar navbar-light bg-light border border-primary d-flex justify-content-between ">
+  <nav class="padding-content navbar navbar-light bg-light  border-primary d-flex justify-content-between ">
     <div (click)="goBack()"><span>Regresar</span></div>
-    <div><img src="https://picsum.photos/50" alt="..." class="rounded-circle"></div>
+
+    <div ngbDropdown class="d-inline-block">
+
+      <div id="dropdownBasic1" ngbDropdownToggle>
+        <img src="https://picsum.photos/50"class="rounded-circle">
+      </div>
+
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button (click)="logOut()" class="dropdown-item">Serrar sesiósn</button>
+      </div>
+
+    </div>
+
   </nav>
   <router-outlet></router-outlet>
   <div class="padding-content"></div>

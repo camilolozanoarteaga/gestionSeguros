@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 // Shared modules
@@ -14,18 +16,19 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 
 // components
 import { DashboardComponent } from './containers/dashboard/dashboard.component';
+import { AuthGuard } from '../auth/shared/guards/auth.guard';
 
 // Routes
 export const ROUTES: Routes = [{
   path: 'dashboard',
   component: DashboardComponent,
   children: [
-    { path: '', pathMatch: 'full', redirectTo: 'menu' },
-    { path: 'menu', loadChildren: './menu/menu.module#MenuModule' },
-    { path: 'admin-users', loadChildren: './admin-users/admin-users.module#AdminUsersModule' },
-    { path: 'policy', loadChildren: './policy/policy.module#PolicyModule' },
-    { path: 'admin-sys', loadChildren: './admin-sys/admin-sys.module#AdminSysModule' },
-    { path: 'clients', loadChildren: './clients/clients.module#ClientsModule' },
+    { path: '', canActivate: [AuthGuard], pathMatch: 'full', redirectTo: 'menu' },
+    { path: 'menu', canActivate: [AuthGuard], loadChildren: './menu/menu.module#MenuModule' },
+    { path: 'admin-users', canActivate: [AuthGuard], loadChildren: './admin-users/admin-users.module#AdminUsersModule' },
+    { path: 'policy', canActivate: [AuthGuard], loadChildren: './policy/policy.module#PolicyModule' },
+    { path: 'admin-sys', canActivate: [AuthGuard], loadChildren: './admin-sys/admin-sys.module#AdminSysModule' },
+    { path: 'clients', canActivate: [AuthGuard], loadChildren: './clients/clients.module#ClientsModule' },
   ]
 }];
 
@@ -33,7 +36,8 @@ export const ROUTES: Routes = [{
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbDropdownModule
   ],
   declarations: [
     DashboardComponent

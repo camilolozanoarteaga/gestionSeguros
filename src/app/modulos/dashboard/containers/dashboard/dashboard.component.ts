@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { NavItemInterface } from '../../models/nav-item.interface';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/modulos/auth/shared/services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,10 @@ export class DashboardComponent implements OnInit {
 
   navItems: NavItemInterface[];
 
-  constructor(public router: Router) { }
+  constructor(
+    public router: Router
+    ,private _AuthService: AuthService
+    ) { }
 
   // COMPONENT LIFECYCLE HOOKS -------------------------------------------------
 
@@ -52,6 +56,17 @@ export class DashboardComponent implements OnInit {
   goBack() {
 
     this.router.navigate(['/dashboard/menu']);
+
+  }
+
+  logOut() {
+
+    this._AuthService.logout()
+      .then(() => {
+
+        this.router.navigate(['/auth/login']);
+
+      });
 
   }
 
