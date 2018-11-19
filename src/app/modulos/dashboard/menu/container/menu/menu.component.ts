@@ -20,27 +20,27 @@ export class MenuComponent implements OnInit {
     this.navItems = [{
       displayName: 'Administrar perfil',
       description: 'Ingrese y administre los usuarios usuarios',
-      iconName: 'fa-user-circle',
+      iconName: 'fa fa-user-circle',
       route: '/dashboard/admin-profile',
     }, {
-      displayName: 'Administracion de opciones del sistema',
+      displayName: 'Opciones del sistema',
       description: 'Ingrese y administre las opciones del sistema',
-      iconName: 'fa-users',
+      iconName: 'fa fa-wrench',
       route: '/dashboard/admin-sys',
     }, {
       displayName: 'Administrar usuarios',
       description: 'Ingrese y adminstre nuevos usuarios',
-      iconName: 'fa-user',
+      iconName: 'fa fa-users',
       route: '/dashboard/admin-users',
     }, {
       displayName: 'Administrar clientes',
-      description: 'Ingrese y administre la información de los clientess',
-      iconName: 'fa-book',
+      description: 'Ingrese y administre la información de los clientes',
+      iconName: 'fa fa-address-book',
       route: '/dashboard/clients',
     }, {
       displayName: 'Crear póliza',
       description: 'Ingrese y cree una nueva poliza',
-      iconName: 'fa-book',
+      iconName: 'fa fa-book',
       route: '/dashboard/policy',
     }];
 
