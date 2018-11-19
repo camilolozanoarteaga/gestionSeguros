@@ -1,10 +1,36 @@
+html,
+body {
+  margin: 0px;
+  height: 100%;
+  // background: #edeff2;
+}
+
+
 // CARD HIGH
 .highCard {
-    height: 200px;
+  height: 200px;
 }
 
 
 // PADDING CONTENT - HEADER
 .padding-content {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.full-container {
+  height: 100%;
+}
+
+.border-b {
+  border: 1px solid #74790d;
+  border-radius: 4px;
+}
+
+.text-colot-login {
+  color: #74790d;
+}
+
+.button-primary {
+  background-color: #74790d;
+  color: white
 }

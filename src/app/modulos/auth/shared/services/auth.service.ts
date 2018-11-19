@@ -15,20 +15,20 @@ export class AuthService {
     private _afs: AngularFirestore,
     private _afAuth: AngularFireAuth
 
-    ) {
+  ) {
 
-      this.user$ = this._afAuth.authState
-        .pipe(
+    this.user$ = this._afAuth.authState
+      .pipe(
 
-          switchMap(authUser => {
+        switchMap(authUser => {
 
-            if (!authUser) {
+          if (!authUser) {
 
-              return of(null);
+            return of(null);
 
-            }
+          }
 
-            return this._afs.doc(`system-users/${authUser.uid}`).valueChanges()
+          return this._afs.doc(`system-users/${authUser.uid}`).valueChanges()
             .pipe(
               skipWhile((userData: any) => !userData),
               rxjsMap((userData: any) => {
@@ -39,9 +39,9 @@ export class AuthService {
               })
             );
 
-          });
+        })
 
-        )
+      );
 
   }
 

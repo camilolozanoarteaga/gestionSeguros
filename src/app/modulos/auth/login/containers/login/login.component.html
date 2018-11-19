@@ -1,6 +1,13 @@
-<div class="border p-3 rounded">
+<div class="top">
+
+  <img class="img-fluid" src="assets/layout/logo.png" >
+
+</div>
+
+
+<div class="p-3 border-b">
   <div>
-    <form [formGroup]="loginForm">
+    <form [formGroup]="loginForm" class="text-colot-login">
       <div class="form-group">
         <label for="email">Email address</label>
         <input type="email" class="form-control" id="email" placeholder="Correo electrónico" formControlName="email">
@@ -9,7 +16,7 @@
         <label for="pass">Password</label>
         <input type="password" class="form-control" id="pass" placeholder="contraseña" formControlName="password">
       </div>
-      <button type="submit" class="btn btn-primary" (click)="signInWithEmail()">Ingresar</button>
+      <button type="submit" class="btn button-primary btn-lg btn-block" (click)="signInWithEmail()">Ingresar</button>
     </form>
   </div>
 </div>
