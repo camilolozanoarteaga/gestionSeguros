@@ -9,6 +9,7 @@ export class PolicyService {
 
   private _collection = 'clients';
   private _collectionPolizy = 'policies';
+  private _backLogDate = 'backLogDate';
 
   clientDocument: AngularFirestoreDocument<ClientInterface>;
   clientObservable$: Observable<ClientInterface>;
@@ -37,9 +38,23 @@ export class PolicyService {
   }
 
   getPolicies(id: string) {
-    const policies = this._afs.collection(this._collectionPolizy, ref => ref.where('idClient', '==', id) );
+    const policies = this._afs.collection(this._collectionPolizy, ref => ref.where('idClient', '==', id));
 
     return policies.valueChanges();
+
+  }
+
+
+  createLogPolicy(pol = '13123', fechaIni = new Date(), fechaFin = new Date()) {
+
+    const data = {
+      fechaIni: fechaIni,
+      title: fechaFin, 
+    };
+    
+    const policy = this._afs.collection(this._collectionPolizy).doc(pol).collection(this._backLogDate).add(data);
+
+    return policy;
 
   }
 

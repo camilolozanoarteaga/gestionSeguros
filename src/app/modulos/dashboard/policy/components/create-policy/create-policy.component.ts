@@ -28,6 +28,10 @@ export class CreatePolicyComponent implements OnInit {
 
   enabledPolicy: boolean;
 
+  error: boolean;
+  success: boolean;
+  load: boolean;
+
   constructor(
     private _fb: FormBuilder,
     private _policyService: PolicyService,
@@ -43,6 +47,10 @@ export class CreatePolicyComponent implements OnInit {
     this.existUser = false;
     this.age = null;
     this.idCLient = null;
+
+    this.error = false;
+    this.load = false;
+    this.success = false;
 
     this.policyClientForm = this._fb.group({
       email: ['', [
@@ -198,14 +206,25 @@ export class CreatePolicyComponent implements OnInit {
 
   createClient() {
 
+    this.load = true;
+    this.error = false;
+
     this._clientsService.createClient(this.policyClientForm.value)
       .then((res) => {
 
-        console.log(res);
+        this.policyForm.reset()
+        this.load = false;
+
+        this.success = true;
+        setTimeout(() => {
+          this.success = false;
+        }, 5000);
+
 
       })
       .catch((err) => {
 
+        this.error = true;
         console.log(err);
 
       });

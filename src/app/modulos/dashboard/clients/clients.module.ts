@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Third-party modules
-import { NgbModule, NgbAccordionModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbAccordionModule, NgbDatepickerModule, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 // Shared modules
 import { SharedModule } from '../shared/shared.module';
@@ -32,7 +32,7 @@ export const ROUTES: Routes = [
     FormsModule,
     ReactiveFormsModule,
     SharedModule.forRoot(),
-    NgbModule, NgbAccordionModule, NgbDatepickerModule
+    NgbModule, NgbAccordionModule, NgbDatepickerModule, NgbModalModule
   ],
   declarations: [ClientsComponent, InformationClientComponent, ListClientsComponent, UpdateClientComponent, PoliciesComponent]
 })

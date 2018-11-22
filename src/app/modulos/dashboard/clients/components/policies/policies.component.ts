@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SharedClientService } from '../../shared/shared-client.service';
 import { ClientInterface } from '@atention-models/client.interface';
 import { PolicyService } from '@atention-services/policy/policy.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import * as moment from 'moment';
 
@@ -12,16 +14,27 @@ import * as moment from 'moment';
 })
 export class PoliciesComponent implements OnInit {
 
-
+  UpdatePolicyForm: FormGroup;
   client: ClientInterface;
   policies: any;
 
   constructor(
     private _sharedClientService: SharedClientService,
-    private _policyService: PolicyService
+    private _policyService: PolicyService,
+    private _fb: FormBuilder,
+    private _modalService: NgbModal
   ) { }
 
   ngOnInit() {
+
+    this.UpdatePolicyForm = this._fb.group({
+      validityInit: ['', [
+        Validators.required,
+      ]],
+      validityFinish: ['', [
+        Validators.required,
+      ]],
+    })
 
     this._sharedClientService.clientCast$.subscribe((client) => {
 
@@ -33,15 +46,42 @@ export class PoliciesComponent implements OnInit {
   }
 
   getPolicies(id: string) {
-    console.log(id)
+
     this._policyService.getPolicies(id)
-      .subscribe((data) =>{
+      .subscribe((data) => {
 
         this.policies = data;
-        
-        console.log(this.policies[0])
+
       });
 
+  }
+
+  updatePolicy(policie: any) {
+
+    console.log(policie)
+    this._policyService.createLogPolicy()
+      .then((success) => {
+        console.log('bien', success);
+      })
+      .catch((err) => {
+        console.log('mal', err);
+      });
+
+  }
+
+  isInvalidRegisterFormGroupInput(inputName: string): boolean {
+
+    return this.UpdatePolicyForm.get(inputName).invalid &&
+      (this.UpdatePolicyForm.get(inputName).dirty || this.UpdatePolicyForm.get(inputName).touched);
+
+  }
+
+  open(content) {
+    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+     
+    }, (reason) => {
+      
+    });
   }
 
 }
