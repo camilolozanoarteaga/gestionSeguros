@@ -17,6 +17,7 @@ export class PoliciesComponent implements OnInit {
   UpdatePolicyForm: FormGroup;
   client: ClientInterface;
   policies: any;
+  selectedPolicy: any;
 
   constructor(
     private _sharedClientService: SharedClientService,
@@ -34,6 +35,9 @@ export class PoliciesComponent implements OnInit {
       validityFinish: ['', [
         Validators.required,
       ]],
+      policy: ['', [
+        Validators.required,
+      ]]
     })
 
     this._sharedClientService.clientCast$.subscribe((client) => {
@@ -56,15 +60,32 @@ export class PoliciesComponent implements OnInit {
 
   }
 
-  updatePolicy(policie: any) {
+  updatePolicy() {
 
-    console.log(policie)
-    this._policyService.createLogPolicy()
-      .then((success) => {
-        console.log('bien', success);
-      })
-      .catch((err) => {
+
+    const { validityInit, validityFinish, policy } = this.UpdatePolicyForm.value;
+
+    this.selectedPolicy['validityInit'] = validityInit;
+    this.selectedPolicy['validityFinish'] = validityFinish;
+    this.selectedPolicy['NewOrRenewal'] = 'Renovar';
+
+    this._policyService.createPolice(this.selectedPolicy)
+      .then(() => {
+
+        return this._policyService.createLogPolicy(policy, validityInit, validityFinish)
+
+          .then((success) => {
+
+            console.log('bien', success);
+            this._modalService.dismissAll();
+
+          });
+
+      }).catch((err) => {
+
         console.log('mal', err);
+        this._modalService.dismissAll();
+
       });
 
   }
@@ -76,12 +97,12 @@ export class PoliciesComponent implements OnInit {
 
   }
 
-  open(content) {
-    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
-     
-    }, (reason) => {
-      
-    });
+  open(content, policie) {
+
+    this.selectedPolicy = policie;
+    this.UpdatePolicyForm.get('policy').setValue(policie['numberPolicy']);
+    this._modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });
+
   }
 
 }

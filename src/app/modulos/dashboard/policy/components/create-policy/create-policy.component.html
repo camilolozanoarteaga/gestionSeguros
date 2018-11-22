@@ -166,22 +166,15 @@
               </div>
 
               <div class="form-group col-md-6">
-                <label for="NewOrRenewal">Nueva o Renovación</label>
-                <select id="NewOrRenewal" formControlName="NewOrRenewal" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('NewOrRenewal') }"
+                <label for="adviser">Asesor</label>
+                <select id="adviser" formControlName="adviser" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('adviser') }"
                   class="form-control">
-                  <option>Nueva</option>
-                  <option>Renovar</option>
+                  <option *ngFor="let user of agent" [value]="user.uid">{{user.names}}</option>
                 </select>
               </div>
             </div>
 
-            <div class="form-group">
-              <label for="adviser">Asesor</label>
-              <select id="adviser" formControlName="adviser" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('adviser') }"
-                class="form-control">
-                <option *ngFor="let user of agent" [value]="user.uid">{{user.names}}</option>
-              </select>
-            </div>
+
 
             <div class="form-group">
               <label for="detail">Detalle de la poliza</label>
@@ -197,11 +190,11 @@
           <div *ngIf="load" class="fa-3x d-flex justify-content-center m-4">
               <i class="fa fa-spinner fa-spin"></i>
             </div>
-          
+
             <div *ngIf="success" class="alert alert-success m-3" role="alert">
               Usuario creado correctamente
             </div>
-          
+
             <div *ngIf="error" class="alert alert-danger" role="alert">
               <strong>Error al ejecutar la acción!</strong> Intentelo nuevamente.
             </div>

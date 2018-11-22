@@ -110,7 +110,7 @@ export class CreatePolicyComponent implements OnInit {
       insured: ['', [
         Validators.required,
       ]],
-      NewOrRenewal: ['', [
+      NewOrRenewal: ['Renovar', [ // valor por defecto
         Validators.required,
       ]],
       adviser: ['', [

@@ -45,14 +45,14 @@ export class PolicyService {
   }
 
 
-  createLogPolicy(pol = '13123', fechaIni = new Date(), fechaFin = new Date()) {
+  createLogPolicy(policyNo, validityInit, validityFinish) {
 
     const data = {
-      fechaIni: fechaIni,
-      title: fechaFin, 
+      validityInit,
+      validityFinish
     };
-    
-    const policy = this._afs.collection(this._collectionPolizy).doc(pol).collection(this._backLogDate).add(data);
+
+    const policy = this._afs.collection(this._collectionPolizy).doc(policyNo).collection(this._backLogDate).add(data);
 
     return policy;
 

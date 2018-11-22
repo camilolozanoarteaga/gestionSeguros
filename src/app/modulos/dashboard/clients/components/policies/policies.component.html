@@ -44,7 +44,7 @@
             <div> <strong>Detalle de la poliza</strong>: {{policie.detail}} </div>
 
             <div class="text-right">
-              <button (click)="open(content)" class="btn btn-outline-success">actualizar</button>
+              <button (click)="open(content, policie)" class="btn btn-outline-success">actualizar</button>
             </div>
 
           </ng-template>
@@ -100,13 +100,13 @@
       </div>
 
 
-<hr>
-        <div class="d-flex justify-content-between">
-          <button type="submit" class="btn btn-success" [disabled]="!UpdatePolicyForm.valid" (click)="updatePolicy()">Guardar</button>
-          <button type="submit" class="btn btn-danger" (click)="cleanForm()">Cancelar</button>
-        </div>
+      <hr>
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-success" [disabled]="!UpdatePolicyForm.valid" (click)="updatePolicy()">Guardar</button>
+        <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Cancelar</button>
+      </div>
 
-      
+
     </form>
 
 
