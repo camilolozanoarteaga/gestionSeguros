@@ -72,7 +72,7 @@
             </div>
             <div class="d-flex justify-content-between">
               <button type="submit" class="btn btn-success" [disabled]="!policyClientForm.valid" (click)="createClient()">Guardar</button>
-              <button type="submit" class="btn btn-danger" (click)="cleanForm()">Limpiar</button>
+              <button type="submit" class="btn btn-danger" (click)="cleanForm(1)">Limpiar</button>
             </div>
           </form>
         </ng-template>
@@ -174,28 +174,26 @@
               </div>
             </div>
 
-
-
             <div class="form-group">
               <label for="detail">Detalle de la poliza</label>
               <textarea class="form-control" formControlName="detail" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('detail') }" id="detail" rows="5"></textarea>
             </div>
 
-            <div class="d-flex justify-content-between">
+            <div *ngIf="!loadPol" class="d-flex justify-content-between">
               <button type="submit" class="btn btn-success" [disabled]="!policyForm.valid" (click)="createPolicy()">Guardar</button>
-              <button type="submit" class="btn btn-danger" (click)="cleanForm()">Limpiar</button>
+              <button type="submit" class="btn btn-danger" (click)="cleanForm(2)">Limpiar</button>
             </div>
           </form>
           <!--  -->
-          <div *ngIf="load" class="fa-3x d-flex justify-content-center m-4">
+          <div *ngIf="loadPol" class="fa-3x d-flex justify-content-center m-4">
               <i class="fa fa-spinner fa-spin"></i>
             </div>
 
-            <div *ngIf="success" class="alert alert-success m-3" role="alert">
-              Usuario creado correctamente
+            <div *ngIf="successPol" class="alert alert-success m-3" role="alert">
+              Poliza creada correctamente
             </div>
 
-            <div *ngIf="error" class="alert alert-danger" role="alert">
+            <div *ngIf="errorPol" class="alert alert-danger" role="alert">
               <strong>Error al ejecutar la acción!</strong> Intentelo nuevamente.
             </div>
 

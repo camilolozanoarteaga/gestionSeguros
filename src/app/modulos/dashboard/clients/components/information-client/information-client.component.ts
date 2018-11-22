@@ -39,19 +39,25 @@ export class InformationClientComponent implements OnInit {
         Validators.email
       ]],
       names: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
       ]],
       address: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
       ]],
       phone1: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(10)
       ]],
       birth: ['', [
         Validators.required
       ]],
       celphone1: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(10)
       ]],
       gender: ['', [
         Validators.required

@@ -28,9 +28,15 @@ export class CreatePolicyComponent implements OnInit {
 
   enabledPolicy: boolean;
 
-  error: boolean;
-  success: boolean;
-  load: boolean;
+  // policy notify
+  errorPol: boolean;
+  successPol: boolean;
+  loadPol: boolean;
+
+  // policy Cli
+  errorCli: boolean;
+  successCli: boolean;
+  loadCli: boolean;
 
   constructor(
     private _fb: FormBuilder,
@@ -48,9 +54,15 @@ export class CreatePolicyComponent implements OnInit {
     this.age = null;
     this.idCLient = null;
 
-    this.error = false;
-    this.load = false;
-    this.success = false;
+    // policy notify
+    this.errorPol = false;
+    this.loadPol = false;
+    this.successPol = false;
+
+    // policy notify
+    this.errorCli = false;
+    this.loadCli = false;
+    this.successCli = false
 
     this.policyClientForm = this._fb.group({
       email: ['', [
@@ -58,19 +70,25 @@ export class CreatePolicyComponent implements OnInit {
         Validators.email
       ]],
       names: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
       ]],
       address: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
       ]],
       phone1: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(10)
       ]],
       birth: ['', [
         Validators.required
       ]],
       celphone1: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(10)
       ]],
       gender: ['', [
         Validators.required
@@ -85,6 +103,7 @@ export class CreatePolicyComponent implements OnInit {
     this.policyForm = this._fb.group({
       numberPolicy: ['', [
         Validators.required,
+        Validators.pattern('^[0-9]+$')
       ]],
       validityInit: ['', [
         Validators.required,
@@ -106,13 +125,12 @@ export class CreatePolicyComponent implements OnInit {
       ]],
       wayToPay: ['', [
         Validators.required,
+        Validators.pattern('^[0-9]+$')
       ]],
       insured: ['', [
         Validators.required,
       ]],
-      NewOrRenewal: ['Renovar', [ // valor por defecto
-        Validators.required,
-      ]],
+      NewOrRenewal: ['Renovar'], // valor por defecto
       adviser: ['', [
         Validators.required,
       ]],
@@ -148,9 +166,22 @@ export class CreatePolicyComponent implements OnInit {
 
   createPolicy() {
 
+    this.errorPol = false;
+    this.loadPol = true;
+
     this._policyService.createPolice(this.policyForm.value)
-      .then((success) => { console.log(success); })
-      .catch((err) => { console.log(err); });
+      .then((success) => { 
+
+        this.loadPol = false;
+        this.successPol = true;
+        setTimeout(() => {
+          this.successPol = false;
+        }, 4000)
+
+       })
+      .catch((err) => { 
+          this.errorPol = true;
+       });
 
   }
 
@@ -206,37 +237,43 @@ export class CreatePolicyComponent implements OnInit {
 
   createClient() {
 
-    this.load = true;
-    this.error = false;
+    this.loadCli = true;
+    this.errorCli = false;
 
     this._clientsService.createClient(this.policyClientForm.value)
       .then((res) => {
 
         this.policyForm.reset()
-        this.load = false;
+        this.loadCli = false;
 
-        this.success = true;
+        this.successCli = true;
         setTimeout(() => {
-          this.success = false;
+          this.successCli = false;
         }, 5000);
 
 
       })
       .catch((err) => {
 
-        this.error = true;
+        this.errorCli = true;
         console.log(err);
 
       });
 
   }
 
-  cleanForm() {
+  cleanForm(form: number ) {
 
-    this.policyClientForm.reset();
-    this.policyClientForm.enable();
-    this.enabledPolicy = true;
+    if(form === 1) {
+      this.policyClientForm.reset();
+      this.policyClientForm.enable();
+      this.enabledPolicy = true;
 
+    } else if(form === 2) {
+      this.policyForm.reset();
+      this.policyForm.enable();
+    }
+    
   }
 
 }

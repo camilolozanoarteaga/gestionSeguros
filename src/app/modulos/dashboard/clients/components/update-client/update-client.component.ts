@@ -41,19 +41,25 @@ export class UpdateClientComponent implements OnInit {
             Validators.email
           ]],
           names: [client['names'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
           ]],
           address: [client['address'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
           ]],
           phone1: [client['phone1'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[0-9]+$'),
+            Validators.maxLength(10)
           ]],
           birth: [client['birth'], [
             Validators.required
           ]],
           celphone1: [client['celphone1'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[0-9]+$'),
+            Validators.maxLength(10)
           ]],
           gender: [client['gender'], [
             Validators.required

@@ -28,6 +28,7 @@ export class SafesComponent implements OnInit {
     this.safeForm = this._fb.group({
       safe: ['', [
         Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
       ]],
     });
 

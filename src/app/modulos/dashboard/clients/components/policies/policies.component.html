@@ -103,7 +103,10 @@
       <hr>
       <div class="d-flex justify-content-between">
         <button type="submit" class="btn btn-success" [disabled]="!UpdatePolicyForm.valid" (click)="updatePolicy()">Guardar</button>
+
         <button type="submit" class="btn btn-danger" (click)="modal.dismiss('Cross click')">Cancelar</button>
+
+        <!-- <button type="submit" class="btn btn-danger" (click)="cleanForm()">Cancelar</button> -->
       </div>
 
 

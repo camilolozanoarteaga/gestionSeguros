@@ -35,16 +35,20 @@ export class CreateUserComponent implements OnInit {
         Validators.required
       ]],
       names: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
       ]],
       address: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
       ]],
       phone: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
       ]],
       celphone: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
       ]],
       userType: ['', [
         Validators.required

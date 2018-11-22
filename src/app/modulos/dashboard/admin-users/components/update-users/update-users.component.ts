@@ -26,7 +26,7 @@ export class UpdateUsersComponent implements OnInit {
   ngOnInit() {
 
     this.load = false;
-    this.success = false;
+    this.success = false; 
     this.error = false;
     this._sharedUserDataService.userCast$.subscribe(
       user => {
@@ -38,16 +38,22 @@ export class UpdateUsersComponent implements OnInit {
             Validators.email
           ]],
           names: [user['names'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
           ]],
           address: [user['address'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
           ]],
           phone: [user['phone'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[0-9]+$'),
+            Validators.maxLength(10),
           ]],
           celphone: [user['celphone'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[0-9]+$'),
+            Validators.maxLength(10)
           ]],
           userType: [user['userType'], [
             Validators.required

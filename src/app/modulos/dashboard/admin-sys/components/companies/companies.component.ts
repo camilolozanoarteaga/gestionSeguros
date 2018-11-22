@@ -29,6 +29,7 @@ export class CompaniesComponent implements OnInit {
     this.CompanieForm = this._fb.group({
       companies: ['', [
         Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
       ]]
     });
 

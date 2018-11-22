@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/modulos/auth/shared/services/auth.service';
 export class DashboardComponent implements OnInit {
 
   navItems: NavItemInterface[];
+  nameUser: String;
 
   constructor(
     public router: Router
@@ -21,6 +22,11 @@ export class DashboardComponent implements OnInit {
   // COMPONENT LIFECYCLE HOOKS -------------------------------------------------
 
   ngOnInit() {
+
+    this._AuthService.user$.subscribe((data) => {
+      console.log('dasdas', data.names);
+      this.nameUser = data.names;
+    })
 
     // Init main nav
     this.navItems = [{
