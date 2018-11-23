@@ -18,5 +18,10 @@
       </div>
       <button type="submit" class="btn button-primary btn-lg btn-block" (click)="signInWithEmail()">Ingresar</button>
     </form>
+
+    <div *ngIf="NoNlogin"  class="m-3 alert alert-warning" role="alert">
+      {{NoNloginMsg}}
+    </div>
   </div>
 </div>
+

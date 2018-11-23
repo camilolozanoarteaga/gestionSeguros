@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   actionInProgress: boolean;
 
+  NoNlogin: boolean;
+  NoNloginMsg: String;
+
   constructor(
     private _router: Router,
     private _fb: FormBuilder,
@@ -21,6 +24,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.NoNlogin = false;
 
     this.loginForm = this._fb.group({
       email: ['', [
@@ -39,6 +44,7 @@ export class LoginComponent implements OnInit {
   signInWithEmail(): void {
     const email = this.loginForm.get('email').value;
     const password = this.loginForm.get('password').value;
+    this.NoNlogin = false;
 
     this._authService.signIn(email, password)
       .then((login: any) => {
@@ -49,13 +55,20 @@ export class LoginComponent implements OnInit {
 
       }).catch((err) => {
 
+        this.NoNlogin = true;
+        
         if (err.code === 'auth/wrong-password') {
-          console.log('mal contra');
+
+          this.NoNloginMsg = 'La contraseña no coincide con el usuarios.';
+
         }
 
         if (err.code === 'auth/user-not-found') {
-          console.log('no existe');
+
+          this.NoNloginMsg = 'El usuario no existe.';
+
         }
+
       });
 
   }
