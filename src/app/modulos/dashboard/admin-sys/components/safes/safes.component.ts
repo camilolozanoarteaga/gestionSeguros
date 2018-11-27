@@ -16,6 +16,8 @@ export class SafesComponent implements OnInit {
   loadUpdate: boolean;
   error: boolean;
 
+  existSafe: boolean;
+
   constructor(
     private _fb: FormBuilder,
     private _adminSysService: AdminSysService
@@ -23,12 +25,13 @@ export class SafesComponent implements OnInit {
 
   ngOnInit() {
 
+    this.existSafe = false;
     this.loadInit = true;
     this.error = false;
     this.safeForm = this._fb.group({
       safe: ['', [
         Validators.required,
-        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+        Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
       ]],
     });
 
@@ -52,21 +55,31 @@ export class SafesComponent implements OnInit {
 
   createSafe() {
 
-    this.loadUpdate = true;
-    this.error = false;
-    this.allSafes.push(this.safeForm.value['safe']);
+    this.existSafe = false;
 
-    this._adminSysService.updateSafes(this.allSafes)
-      .then(() => {
+    if (this.allSafes.includes(this.safeForm.value['safe'])) {
 
-        this.loadUpdate = false;
+      this.existSafe = true;
 
-      })
-      .catch(() => {
+    } else {
 
-        this.error = true;
+      this.loadUpdate = true;
+      this.error = false;
+      this.allSafes.push(this.safeForm.value['safe']);
 
-      });
+      this._adminSysService.updateSafes(this.allSafes)
+        .then(() => {
+
+          this.loadUpdate = false;
+
+        })
+        .catch(() => {
+
+          this.error = true;
+
+        });
+
+    }
 
   }
 

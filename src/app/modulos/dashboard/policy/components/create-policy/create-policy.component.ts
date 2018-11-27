@@ -21,6 +21,8 @@ export class CreatePolicyComponent implements OnInit {
   age: number;
   agent: any;
 
+  exitPolicy: boolean;
+
   idCLient: string;
 
   companyList: string[];
@@ -64,6 +66,8 @@ export class CreatePolicyComponent implements OnInit {
     this.loadCli = false;
     this.successCli = false
 
+    this.exitPolicy = false;
+
     this.policyClientForm = this._fb.group({
       email: ['', [
         Validators.required,
@@ -71,7 +75,7 @@ export class CreatePolicyComponent implements OnInit {
       ]],
       names: ['', [
         Validators.required,
-        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+        Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
       ]],
       address: ['', [
         Validators.required,
@@ -119,16 +123,19 @@ export class CreatePolicyComponent implements OnInit {
       ]],
       assuredProduct: ['', [
         Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
       ]],
       policyValue: ['', [
         Validators.required,
+        Validators.pattern('^[0-9]+$')
       ]],
       wayToPay: ['', [
         Validators.required,
-        Validators.pattern('^[0-9]+$')
+        Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
       ]],
       insured: ['', [
         Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
       ]],
       NewOrRenewal: ['Renovar'], // valor por defecto
       adviser: ['', [
@@ -136,15 +143,16 @@ export class CreatePolicyComponent implements OnInit {
       ]],
       detail: ['', [
         Validators.required,
+        Validators.pattern('^[áéíúóñÑa-zA-Z0-9 \-/#\s]+$')
       ]],
       idClient: ['', [
         Validators.required
       ]],
     });
 
-    this._listService.getCompanies().subscribe((company) => this.companyList = company['companies'] );
-    this._listService.getSafes().subscribe((safe) => this.safesList = safe['safes'] );
-    this._adminUsersService.getAllUsers().subscribe( (user) => this.agent = user );
+    this._listService.getCompanies().subscribe((company) => this.companyList = company['companies']);
+    this._listService.getSafes().subscribe((safe) => this.safesList = safe['safes']);
+    this._adminUsersService.getAllUsers().subscribe((user) => this.agent = user);
 
   }
 
@@ -169,8 +177,15 @@ export class CreatePolicyComponent implements OnInit {
     this.errorPol = false;
     this.loadPol = true;
 
+    const { numberPolicy, validityInit, validityFinish } = this.policyForm.value;
+
     this._policyService.createPolice(this.policyForm.value)
-      .then((success) => { 
+      .then(() => {
+
+        return this._policyService.createLogPolicy(numberPolicy, validityInit, validityFinish);
+
+      })
+      .then((success) => {
 
         this.loadPol = false;
         this.successPol = true;
@@ -178,10 +193,10 @@ export class CreatePolicyComponent implements OnInit {
           this.successPol = false;
         }, 4000)
 
-       })
-      .catch((err) => { 
-          this.errorPol = true;
-       });
+      })
+      .catch((err) => {
+        this.errorPol = true;
+      });
 
   }
 
@@ -190,7 +205,7 @@ export class CreatePolicyComponent implements OnInit {
     this._policyService.getClient(id).subscribe(
       client => {
 
-        if ( client !== undefined ) {
+        if (client !== undefined) {
 
           this.existUser = true;
 
@@ -243,8 +258,8 @@ export class CreatePolicyComponent implements OnInit {
     this._clientsService.createClient(this.policyClientForm.value)
       .then((res) => {
 
-        this.policyForm.reset()
         this.loadCli = false;
+        this.policyForm.reset()
 
         this.successCli = true;
         setTimeout(() => {
@@ -262,18 +277,38 @@ export class CreatePolicyComponent implements OnInit {
 
   }
 
-  cleanForm(form: number ) {
+  cleanForm(form: number) {
 
-    if(form === 1) {
+    if (form === 1) {
       this.policyClientForm.reset();
       this.policyClientForm.enable();
       this.enabledPolicy = true;
 
-    } else if(form === 2) {
+    } else if (form === 2) {
       this.policyForm.reset();
       this.policyForm.enable();
     }
-    
+
+  }
+
+  searchPolicy(value: string) {
+
+    this.exitPolicy = false;
+    this.policyForm.enable();
+
+
+    this._policyService.getPolicy(value)
+      .subscribe((data) => {
+
+        if (data !== undefined) {
+
+          this.exitPolicy = true;
+          this.policyForm.disable();
+
+        }
+
+      }, (err) => console.log(err))
+
   }
 
 }

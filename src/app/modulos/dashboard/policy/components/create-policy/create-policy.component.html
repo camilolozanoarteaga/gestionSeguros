@@ -86,8 +86,8 @@
             <div class="row">
               <div class="form-group col-sm-3">
                 <label for="numberPolicy">Número de poliza</label>
-                <input type="text" formControlName="numberPolicy" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('numberPolicy') }"
-                  id="numberPolicy">
+                <input type="text" formControlName="numberPolicy" class="form-control" #pol (blur)="searchPolicy(pol.value)"
+                  [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('numberPolicy') }" id="numberPolicy">
               </div>
               <div class="form-group col-sm-9">
                 <div class="row">
@@ -122,11 +122,15 @@
                 </div>
               </div>
             </div>
+            <div *ngIf="exitPolicy" class="alert alert-success" role="alert">
+                La poliza ya fue creada
+              </div>
+
             <div class="form-row">
 
               <div class="form-group col-md-6">
                 <label for="safeType">Compañia aseguradora</label>
-                <select  id="safeType" formControlName="company" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('safeType') }"
+                <select id="safeType" formControlName="company" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('safeType') }"
                   class="form-control">
                   <option *ngFor="let comapany of companyList">{{comapany}}</option>
                 </select>
@@ -176,7 +180,8 @@
 
             <div class="form-group">
               <label for="detail">Detalle de la poliza</label>
-              <textarea class="form-control" formControlName="detail" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('detail') }" id="detail" rows="5"></textarea>
+              <textarea class="form-control" formControlName="detail" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('detail') }"
+                id="detail" rows="5"></textarea>
             </div>
 
             <div *ngIf="!loadPol" class="d-flex justify-content-between">
@@ -186,16 +191,16 @@
           </form>
           <!--  -->
           <div *ngIf="loadPol" class="fa-3x d-flex justify-content-center m-4">
-              <i class="fa fa-spinner fa-spin"></i>
-            </div>
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
 
-            <div *ngIf="successPol" class="alert alert-success m-3" role="alert">
-              Poliza creada correctamente
-            </div>
+          <div *ngIf="successPol" class="alert alert-success m-3" role="alert">
+            Poliza creada correctamente
+          </div>
 
-            <div *ngIf="errorPol" class="alert alert-danger" role="alert">
-              <strong>Error al ejecutar la acción!</strong> Intentelo nuevamente.
-            </div>
+          <div *ngIf="errorPol" class="alert alert-danger" role="alert">
+            <strong>Error al ejecutar la acción!</strong> Intentelo nuevamente.
+          </div>
 
         </ng-template>
       </ngb-panel>

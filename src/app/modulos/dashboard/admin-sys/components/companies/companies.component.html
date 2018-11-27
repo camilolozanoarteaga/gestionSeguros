@@ -57,6 +57,10 @@
 
         </form>
 
+        <div *ngIf="existCompany" class="alert alert-info m-4" role="alert">
+          La compañia ya fue creada.
+        </div>
+
       </ng-template>
     </ngb-panel>
   </ngb-accordion>

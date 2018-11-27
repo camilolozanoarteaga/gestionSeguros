@@ -17,6 +17,8 @@ export class CompaniesComponent implements OnInit {
   loadUpdate: boolean;
   error: boolean;
 
+  existCompany: boolean;
+
   constructor(
     private _fb: FormBuilder,
     private _adminSysService: AdminSysService,
@@ -25,11 +27,13 @@ export class CompaniesComponent implements OnInit {
 
   ngOnInit() {
 
+    this.existCompany = false;
+
     this.loadInit = true;
     this.CompanieForm = this._fb.group({
       companies: ['', [
         Validators.required,
-        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+        Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$'),
       ]]
     });
 
@@ -52,20 +56,26 @@ export class CompaniesComponent implements OnInit {
 
   createCompanie() {
 
-    this.loadUpdate = true;
-    this.error = false;
-    this.allCompanies.push(this.CompanieForm.value['companies']);
-    this._adminSysService.updateCompanies(this.allCompanies)
-      .then(() => {
+    this.existCompany = false;
 
-        this.loadUpdate = false;
+    if (this.allCompanies.includes(this.CompanieForm.value['companies'])) {
+      this.existCompany = true;
+    } else {
+      this.loadUpdate = true;
+      this.error = false;
+      this.allCompanies.push(this.CompanieForm.value['companies']);
+      this._adminSysService.updateCompanies(this.allCompanies)
+        .then(() => {
 
-      })
-      .catch(() => {
+          this.loadUpdate = false;
 
-        this.error = true;
+        })
+        .catch(() => {
 
-      });
+          this.error = true;
+
+        });
+    }
 
   }
 

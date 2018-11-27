@@ -39,7 +39,7 @@ export class UpdateUsersComponent implements OnInit {
           ]],
           names: [user['names'], [
             Validators.required,
-            Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+            Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
           ]],
           address: [user['address'], [
             Validators.required,

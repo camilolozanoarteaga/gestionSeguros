@@ -8,7 +8,7 @@
 
   <div class="form-group">
     <label for="names">Identificación del usuario</label>
-    <input type="text" formControlName="id" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('id') }"
+    <input type="text" formControlName="id" #idC (blur)="setPassword(idC.value)" class="form-control" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInput('id') }"
       id="names" placeholder="Número de identificación del usuarios">
   </div>
 
@@ -61,3 +61,19 @@
 <div *ngIf="existUser" class="alert alert-danger m-3" role="alert">
   El corréo ya fue registrado, valide la información
 </div>
+
+
+<div *ngIf="created" class="alert alert-success m-3" role="alert">
+    <h4 class="alert-heading">Información del usuario!</h4>
+    <p>Se ha creado un nuevo usuario, a continuación indicamos las credeciales, recuerde que se debe actualizar la constraseña cuando el usuarios ingrese a la aplicación</p>
+    <hr>
+
+      <div>
+          <strong>Usuario</strong> : Correo electrónico del usuario registrado
+      </div>
+
+      <div>
+        <strong>Constraseña</strong> : Identificación del usuario
+      </div>
+
+  </div>

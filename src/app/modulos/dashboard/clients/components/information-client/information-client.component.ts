@@ -40,7 +40,7 @@ export class InformationClientComponent implements OnInit {
       ]],
       names: ['', [
         Validators.required,
-        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+        Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
       ]],
       address: ['', [
         Validators.required,

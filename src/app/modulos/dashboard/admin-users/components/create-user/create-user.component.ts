@@ -13,6 +13,7 @@ export class CreateUserComponent implements OnInit {
   existUser: boolean;
   success: boolean;
   loadInit: boolean;
+  created: boolean;
 
   constructor(
     private _fb: FormBuilder,
@@ -25,18 +26,19 @@ export class CreateUserComponent implements OnInit {
     this.existUser = false;
     this.success = false;
     this.loadInit = false;
+    this.created = false;
 
     this.userForm = this._fb.group({
       email: ['', [
         Validators.required,
         Validators.email
       ]],
-      password: ['admin123', [
+      password: ['', [
         Validators.required
       ]],
       names: ['', [
         Validators.required,
-        Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+        Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
       ]],
       address: ['', [
         Validators.required,
@@ -44,17 +46,20 @@ export class CreateUserComponent implements OnInit {
       ]],
       phone: ['', [
         Validators.required,
-        Validators.pattern('^[0-9]+$')
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(10)
       ]],
       celphone: ['', [
         Validators.required,
-        Validators.pattern('^[0-9]+$')
+        Validators.pattern('^[0-9]+$'),
+        Validators.maxLength(10)
       ]],
       userType: ['', [
         Validators.required
       ]],
       id: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$')
       ]],
       systemType: [1],
       state: [true]
@@ -71,20 +76,32 @@ export class CreateUserComponent implements OnInit {
 
   }
 
+  setPassword(id:string ) {
+    this.userForm.get('password').setValue(id);
+  }
+
   createUser() {
 
     this.success = false;
     this.existUser = false;
     this.loadInit = true;
+    this.created = false;
+    
 
     this._adminUsersService.createSystemUser(this.userForm.value)
       .then((success) => {
-        this.success = true;
+        //this.success = true;
         this.loadInit = false;
+        this.created = true;
+
 
         setTimeout(() => {
-          this.success = false;
+          //this.success = false;
         }, 4000)
+
+        setTimeout(() => {
+          this.created = false;
+        }, 6000);
 
       })
       .catch(() => {

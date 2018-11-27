@@ -36,7 +36,7 @@
       </div>
     </ng-template>
   </ngb-panel>
-  <ngb-panel title="Crear nuevo seguro">
+  <ngb-panel title="Crear nuevo tipo de seguro">
     <ng-template ngbPanelContent>
 
       <form [formGroup]="safeForm">
@@ -53,6 +53,10 @@
         </div>
 
       </form>
+
+      <div *ngIf="existSafe" class="alert alert-info m-4" role="alert">
+        El tipo de seguro ya fue creada.
+      </div>
 
     </ng-template>
   </ngb-panel>

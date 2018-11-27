@@ -14,6 +14,9 @@ export class PolicyService {
   clientDocument: AngularFirestoreDocument<ClientInterface>;
   clientObservable$: Observable<ClientInterface>;
 
+  policyDocument: AngularFirestoreDocument<any>;
+  policyObservable$: Observable<any>;
+
 
   private _policies: AngularFirestoreCollection<any> = this._afs.collection(this._collectionPolizy);
 
@@ -31,6 +34,15 @@ export class PolicyService {
 
   }
 
+  getPolicy(numPolizy: string): Observable<any> {
+
+    this.policyDocument = this._afs.doc(`${this._collectionPolizy}/${numPolizy}`);
+    this.policyObservable$ = this.policyDocument.valueChanges();
+
+    return this.policyObservable$;
+
+  }
+  
   createPolice(policy: any) {
 
     return this._policies.doc(policy['numberPolicy']).set(policy);
