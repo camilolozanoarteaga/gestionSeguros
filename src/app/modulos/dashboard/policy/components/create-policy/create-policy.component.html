@@ -129,16 +129,16 @@
             <div class="form-row">
 
               <div class="form-group col-md-6">
-                <label for="safeType">Compañia aseguradora</label>
-                <select id="safeType" formControlName="company" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('safeType') }"
+                <label for="company">Compañia aseguradora</label>
+                <select id="company" formControlName="company" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('company') }"
                   class="form-control">
                   <option *ngFor="let comapany of companyList">{{comapany}}</option>
                 </select>
               </div>
 
               <div class="form-group col-md-6">
-                <label for="company">Tipo seguro </label>
-                <select id="company" formControlName="safeType" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('company') }"
+                <label for="safeType">Tipo seguro </label>
+                <select id="safeType" formControlName="safeType" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('safeType') }"
                   class="form-control">
                   <option *ngFor="let safe of safesList">{{safe}}</option>
                 </select>
@@ -157,8 +157,14 @@
               </div>
               <div class="form-group col-md-4">
                 <label for="wayToPay">Forma de pago</label>
-                <input type="text" formControlName="wayToPay" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('wayToPay') }"
-                  class="form-control" id="wayToPay">
+
+                <select id="wayToPay" formControlName="wayToPay" [ngClass]="{ 'is-invalid': isInvalidRegisterFormGroupInputPolicy('wayToPay') }"
+                  class="form-control">
+                  <option>CONTADO</option>
+                  <option>CREDITO</option>
+                </select>
+
+
               </div>
             </div>
 

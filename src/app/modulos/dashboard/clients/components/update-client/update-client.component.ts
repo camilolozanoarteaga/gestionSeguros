@@ -42,7 +42,7 @@ export class UpdateClientComponent implements OnInit {
           ]],
           names: [client['names'], [
             Validators.required,
-            Validators.pattern('^[áéíúóñÑa-zA-Z\s]+$')
+            Validators.pattern('^[áéíúóñÑa-zA-Z \s]+$')
           ]],
           address: [client['address'], [
             Validators.required,
@@ -65,7 +65,8 @@ export class UpdateClientComponent implements OnInit {
             Validators.required
           ]],
           id: [client['id'], [
-            Validators.required
+            Validators.required,
+            Validators.pattern('^[0-9]+$'),
           ]],
           systemType: [2], // client
           state: [client['state'], [

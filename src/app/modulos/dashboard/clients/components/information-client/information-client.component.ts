@@ -63,7 +63,8 @@ export class InformationClientComponent implements OnInit {
         Validators.required
       ]],
       id: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('^[0-9]+$'),
       ]],
       systemType: [2], // client
       state: [true]
