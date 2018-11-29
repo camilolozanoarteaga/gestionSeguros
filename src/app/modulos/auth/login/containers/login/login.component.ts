@@ -4,6 +4,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from '../../../shared/services/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,7 +22,13 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _fb: FormBuilder,
     private _authService: AuthService,
-  ) { }
+  ) { 
+    this._authService.user$.subscribe((data) => {
+      if(data !== null) {
+        this._router.navigate(['/dashboard']);
+      }
+    });
+  }
 
   ngOnInit() {
 
@@ -36,6 +43,14 @@ export class LoginComponent implements OnInit {
         Validators.required
       ]]
     });
+
+  }
+
+
+  isInvalidRegisterFormGroupInput(inputName: string): boolean {
+
+    return this.loginForm.get(inputName).invalid &&
+      (this.loginForm.get(inputName).dirty || this.loginForm.get(inputName).touched);
 
   }
 
@@ -56,7 +71,7 @@ export class LoginComponent implements OnInit {
       }).catch((err) => {
 
         this.NoNlogin = true;
-        
+
         if (err.code === 'auth/wrong-password') {
 
           this.NoNloginMsg = 'La contraseña no coincide con el usuarios.';
