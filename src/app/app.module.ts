@@ -2,7 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 // Third-party modules
-import { AngularFireModule } from 'angularfire2';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+
+
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 // App modules
@@ -22,6 +27,7 @@ import { AppComponent } from './app.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MessagingService } from './shared/messaging-service.service';
 
 @NgModule({
   declarations: [
@@ -31,6 +37,9 @@ import { environment } from '../environments/environment';
     // Core modules
     BrowserModule,
     RouterModule.forRoot(ROUTES),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // App modules
     AuthModule,
@@ -38,7 +47,7 @@ import { environment } from '../environments/environment';
     NgxSpinnerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [MessagingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
