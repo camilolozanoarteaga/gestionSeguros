@@ -73,6 +73,11 @@ export class SafesComponent implements OnInit {
           this.loadUpdate = false;
 
         })
+        .then(() => {
+
+          this.safeForm.reset();
+
+        })
         .catch(() => {
 
           this.error = true;

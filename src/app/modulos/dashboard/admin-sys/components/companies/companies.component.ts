@@ -70,6 +70,11 @@ export class CompaniesComponent implements OnInit {
           this.loadUpdate = false;
 
         })
+        .then(() => {
+
+          this.CompanieForm.reset();
+
+        })
         .catch(() => {
 
           this.error = true;
